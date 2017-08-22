@@ -9,15 +9,37 @@
   </head>
   <body class="container">
     <div class="col-sm-8 col-sm-offset-2">
-      <nav class="navbar navbar-default">
-        <a class="navbar-brand" href="/">Mutably Front-end</a>
-      </nav>
+        <nav class="navbar navbar-default navbar-toggleable-md">
+          <a class="navbar-brand active" href="/pokemon">POKEMONN</a>
+        </nav>
+        
+
       <div class="panel panel-default">
-        <div class="panel-heading">[Your Chosen Resource]</div>
+        <div class="panel-heading">pokemon!</div>
         <ul class="list-group">
-          <!-- your resource items here -->
+          
         </ul>
       </div>
+
+      <div class="panel panel-default">
+        <label class="h2" for="create-pokemon-form">Addapokemon</label>
+        <form class="form-inline create-pokemon-form">
+
+          <div class="form-group">
+            <label class="px-1" for="pokemon-name">Pokemon Name</label>
+            <input type="pokemonName" name="pokemon-name" class="form-control pokemonNameInformation">
+          </div>
+
+          <div class="form-group">
+            <label class="px-1" for="pokemon-pokedex">Pokedex</label>
+            <input type="pokemonPokedex" name="pokemon-pokedex" class="form-control pokemonPokedexInformation">
+          </div>
+
+          <button type="submit" class="btn btn-primary form-control add-btn">Create</button>
+
+        </form>
+      </div>
+
     </div>
   </body>
 </html>
