@@ -44,7 +44,7 @@ $(document).ready(function(){
     $.ajax({
       method: 'PUT',
       url: 'http://mutably.herokuapp.com/pokemon/'+id,
-      data: {name: updatedName},
+      data: { name: updatedName },
       success: handlePokemonUpdateResponse
     })
   })
@@ -87,12 +87,12 @@ function handlePokemonDeleteResponse(data) {
 
 function handlePokemonUpdateResponse(data) {
   var id = data._id
-  console.log( '---===data===---', data ); 
-  console.log( '---===id===---', id ); 
+
   $('.name-'+id).html('&nbsp;'+data.name)
-  
+
   $('.name-'+id).show()
   $('.input-'+id).hide()
+
   $('.edit-'+id).show()
   $('.save-'+id).hide()
 }
