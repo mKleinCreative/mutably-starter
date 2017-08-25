@@ -13,8 +13,7 @@ export default class Pokemon extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps = this.props)
+  componentWillMount() {
     const currentState = this.state
     currentState.newValues = { 
       name: this.props.name,
@@ -23,6 +22,7 @@ export default class Pokemon extends Component {
     }
     this.setState(currentState)
   }
+
   handleEditPokemon = () => {
     this.setState({ editing: true })
   }
@@ -39,8 +39,17 @@ export default class Pokemon extends Component {
     .then(response => response.json())
     .then(pokemons => console.log('updated pokemon::', pokemons))
     this.setState({ editing: false })
-}
-  
+  }
+
+  handleDeletePokemon = () => {
+    fetch(`https://mutably.herokuapp.com/pokemon/${this.props._id}`, {
+      method: 'DELETE',
+      headers: new Headers({}),
+    })
+    .then(response => response.json())
+    .then(pokemons => console.log('deleted pokemon::', pokemons))
+    .then(() => this.props.onRemovePokemon(this.props._id))
+  }
 
   renderSaveOrEdit = () => {
     const editing = this.state.editing
@@ -63,14 +72,14 @@ export default class Pokemon extends Component {
 
   renderInput = () => {
     const { editing } = this.state
-    const { name, image, pokedex } = this.props
+    const { name, image, pokedex } = this.state.newValues
 
     if (editing) {
       return (
         <div>
-          <input onChange={ e => this.handleChange('name', e.target.value ) } value={ this.state.newValues.name } type='text' />
-          <input onChange={ e => this.handleChange('pokedex', e.target.value ) } value={ this.state.newValues.pokedex } type= 'text' />
-          <input onChange={ e => this.handleChange('image', e.target.value ) } value={ this.state.newValues.image } type='text' />
+          <input onChange={ e => this.handleChange('name', e.target.value ) } value={ name } type='text' />
+          <input onChange={ e => this.handleChange('pokedex', e.target.value ) } value={ pokedex } type= 'text' />
+          <input onChange={ e => this.handleChange('image', e.target.value ) } value={ image } type='text' />
         </div>
       )
     } else {
@@ -96,7 +105,7 @@ export default class Pokemon extends Component {
         <div style={styles.item}>
           { this.renderSaveOrEdit() }
           { this.renderInput() }
-          <Button buttonType={() => console.log( '<3333333 cake <3333333' ) } text={"delete"} />
+          <Button buttonType={ this.handleDeletePokemon } text={"delete"} />
         </div>
       </div>
     );
@@ -109,7 +118,6 @@ const styles = {
     display: "flex",
     flexDirection: "column"
   },
-
   item: {
     backgroundColor: "whitesmoke",
     flexDirection: "row",
