@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Fetch from 'react-fetch'
 import Title from './Title'
 import Pokemon from './Pokemon'
-import Input from './Input'
 
 // VinylList = React.createClass({
 //   getInitialState() {
@@ -40,6 +39,7 @@ export default class App extends Component {
     this.state = {
       pokemons: []
     }
+    // this.updatePokemon = this.updatePokemon.bind(this)
   }
   
   componentDidMount() {
@@ -61,20 +61,30 @@ export default class App extends Component {
       })
   }
   
-  onAddPokemon = (newPokemon) => {
-    const { pokemons } = this.state
+  // updatePokemon = (i) => {
+  //   this.setState({
+  //     newValues: {
+  //       name: 
+  //       pokedex: 
+  //       image:
+  //     }
+  //   })
+  // }
 
-    this.setState({
-      pokemon: [...newPokemon, ...pokemon],
-    })
-  }
+  // onAddPokemon = (newPokemon) => {
+  //   const { pokemons } = this.state
+  // 
+  //   this.setState({
+  //     pokemon: [...newPokemon, ...pokemon],
+  //   })
+  // }
 
-  onRemovePokemon = (index) => {
-    const { pokemons } = this.state
-    this.setState({
-      pokemon: pokemon.filter((name, i) => i !== index),
-    })
-  }
+  // onRemovePokemon = (index) => {
+  //   const { pokemons } = this.state
+  //   this.setState({
+  //     pokemon: pokemon.filter((name, i) => i !== index),
+  //   })
+  // }
 
   render() {
     const { names, images, pokedex } = this.state
@@ -86,7 +96,6 @@ export default class App extends Component {
         <Title>
           PERK A MERN
         </Title>
-        <Input onSubmitEditing={this.onAddPokemon} />
         { allPokemonsJSX }
       </div>
     )
